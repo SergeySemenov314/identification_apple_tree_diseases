@@ -1,0 +1,13 @@
+# Claude Code local settings
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Models / data / outputs
+*.pth
+*.pt
+*.csv
+weights/
