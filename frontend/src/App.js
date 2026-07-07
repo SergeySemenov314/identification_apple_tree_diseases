@@ -327,7 +327,10 @@ export default function App() {
 function ResultBody({ result, preview }) {
   const healthy = result.is_healthy;
   const diseases = result.diseases || [];
-  const gradcam = result.gradcam || [];
+  // "Комплекс болезней" (complex) — keep its Grad-CAM tab last.
+  const gradcam = (result.gradcam || []).slice().sort(
+    (a, b) => (a.label === 'complex') - (b.label === 'complex')
+  );
 
   const [camIdx, setCamIdx] = useState(0);
   useEffect(() => { setCamIdx(0); }, [result]);
