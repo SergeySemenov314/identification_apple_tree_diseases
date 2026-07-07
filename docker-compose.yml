@@ -1,0 +1,46 @@
+services:
+  apple-inference:
+    build:
+      context: ./inference_service
+    container_name: apple-inference
+    volumes:
+      - ./models:/app/model:ro
+    networks:
+      - ollama-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+
+  apple-backend:
+    build:
+      context: ./backend
+    container_name: apple-backend
+    environment:
+      - INFERENCE_URL=http://apple-inference:8001
+      - GALLERY_DIR=/app/test_photos
+    volumes:
+      - ./test_photos:/app/test_photos:ro
+    depends_on:
+      apple-inference:
+        condition: service_healthy
+    networks:
+      - ollama-net
+    restart: unless-stopped
+
+  apple-frontend:
+    build:
+      context: ./frontend
+    container_name: apple-frontend
+    depends_on:
+      - apple-backend
+    networks:
+      - ollama-net
+    restart: unless-stopped
+
+networks:
+  ollama-net:
+    external: true
