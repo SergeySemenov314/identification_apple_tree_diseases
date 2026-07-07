@@ -45,7 +45,7 @@ DISEASE_INFO = {
     },
     "powdery_mildew": {
         "name_ru": "Мучнистая роса",
-        "description": "Белый мучнистый налёт на листьях и побегах (Podosphaera leucotricha).",
+        "description": "Грибковое заболевание (Podosphaera leucotricha): белый мучнистый налёт на листьях, побегах и бутонах.",
         "is_healthy": False,
     },
     "complex": {

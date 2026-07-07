@@ -527,3 +527,10 @@
   line-height: 1.6;
 }
 .modal-section-content b { color: #4ade80; font-weight: 600; }
+.modal-section-content a {
+  color: #4ade80;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.modal-section-content a:hover { color: #7ee7a4; }
